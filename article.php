@@ -25,6 +25,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 
 <style>
@@ -43,19 +46,17 @@
         if(isset($_SESSION['role'])){
             $role = $_SESSION['role'];
             if(intval($role)==100){ ?>
-                <div class="rightalign">
                     <button name="create" onclick="location.href='create.php'">Skapa</button>  <?php 
             }
         } else {}
         if(isset($_SESSION['role'])){
             $role = $_SESSION['role'];
             if($role == null){ ?>
-                <button name="login" onclick="location.href='login.php'">Log in</button> <?php 
+                <button name="login" onclick="location.href='login.php'">Logga in</button> <?php 
             } else { ?>
-                <button name="logout" onclick="location.href='logout.php'">Log out</button> <?php }  ?>
-            </div>
-        <?php }else{ ?>
-            <button name="login" onclick="location.href='login.php'">Log in</button> <?php 
+                <button name="logout" onclick="location.href='logout.php'">Logga ut</button> <?php }  
+        }else{ ?>
+            <button name="login" onclick="location.href='login.php'">Logga in</button> <?php 
         } ?>        
     </header>
 

@@ -20,6 +20,9 @@ header{
     align-content: center;
     display: flex;
     flex-direction: row;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
 }
 
 button{
@@ -32,14 +35,7 @@ button{
 header button{
     margin-top: auto;   margin-bottom: auto;
     padding: 2px;
-    margin-left: 10%;
     font-size: 20px;
-}
-
-.rightalign{
-    width: 100%;
-    display: flex;  flex-direction: row;
-    margin-left: auto;
 }
 
 .middle{
