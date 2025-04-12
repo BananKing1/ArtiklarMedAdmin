@@ -30,11 +30,16 @@
                     <button name="create" onclick="location.href='create.php'">Skapa</button>  <?php 
             }
         } else {}
-        if(isset($_SESSION['role'])){ ?>
-                    <button name="logout" onclick="location.href='logout.php'">Log out</button> <?php
-        } else { ?>
-                    <button name="login" onclick="location.href='login.php'">Log in</button> <?php } ?>
-                </div>        
+        if(isset($_SESSION['role'])){
+            $role = $_SESSION['role'];
+            if($role == null){ ?>
+                <button name="login" onclick="location.href='login.php'">Log in</button> <?php 
+            } else { ?>
+                <button name="logout" onclick="location.href='logout.php'">Log out</button> <?php }  ?>
+            </div>
+        <?php }else{ ?>
+            <button name="login" onclick="location.href='login.php'">Log in</button> <?php 
+        } ?>        
     </header>
     
     <?php
@@ -43,9 +48,9 @@
             $password = md5($_POST['password']);
             $role = $_POST['role'];
     
-            $sql = "INSERT INTO tblusers(username, role, password) VALUES ('$username','$password','$role')";
+            $sql = "INSERT INTO tblusers(username, role, password) VALUES ('$username','$role','$password')";
             $result = mysqli_query($conn, $sql);
-            
+
             header("Refresh: 0;"); 
         }
     ?>
