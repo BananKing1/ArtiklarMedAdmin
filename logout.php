@@ -1,14 +1,16 @@
 <?php session_start(); ?>
-
 <!DOCTYPE html>
 
 <?php
     $host = "localhost";
     $user = "root";
     $pass = "";
-    $db="ama";
+    $db="supportflowab";
 
     $conn=mysqli_connect($host, $user, $pass, $db);
+
+    $sql="SELECT * FROM tblmatters WHERE status='open' OR status='ongoing' ORDER BY created DESC";
+    $result = mysqli_query($conn, $sql);
 ?>
 
 <html lang="en">
@@ -18,10 +20,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="stylesheet.css">
 </head>
+
+
+
 <body>
     <header>
         <button name="home" onclick="location.href='index.php'">Hem</button>
-        
     <?php 
         if(isset($_SESSION['role'])){
             $role = $_SESSION['role'];
@@ -37,25 +41,22 @@
                 </div>        
     </header>
 
-
     <div class="middle">
-        <?php 
-        $sql = " SELECT * FROM `tblarticle` WHERE 1 ";
-        $result = mysqli_query($conn, $sql);
-        if ($result && mysqli_num_rows($result) > 0) {
-            while($row=mysqli_fetch_assoc($result)){ 
-                $article_id = $row['id']?>
-        <div class="article">
-        <h1> <a href="article.php?id=<?=$row['id']?>"> <?=$row['rubrik']?></a></h1>
-            <h2><?=$row['ingress'] ?></h2>
-            <p>Författare: <?=$row['writer'] ?></p>
-        </div> <?php
-        
-            }
-        }else{
-            echo "No results found or query error.";
-            mysqli_close($conn);
-        } ?>
-    </div> 
-</body>
-</html>
+        <div class="content">
+            <h1>Är du säker att du vill logga ut?</h1>
+            <form action="logout.php" method="POST">
+                <input type="submit" name="btnLogout" value="Logga ut">
+            </form>
+        </div>
+    </div>
+
+<?php
+    if(isset($_POST['btnLogout'])){
+        session_start();
+        $_SESSION['id']="";
+        $_SESSION['role']="";
+        $_SESSION['name']="";   
+        session_destroy();
+        header("Location:index.php"); 
+}
+?>

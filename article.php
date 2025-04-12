@@ -9,6 +9,14 @@
     $db="ama";
 
     $conn=mysqli_connect($host, $user, $pass, $db);
+
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $id = intval($_GET['id']); }
+
+    $sql = "SELECT * FROM `tblarticle` WHERE `id` = $id";
+    $result = mysqli_query($conn, $sql);
+    $article = mysqli_fetch_assoc($result);
+    mysqli_close($conn);
 ?>
 
 <html lang="en">
@@ -18,6 +26,15 @@
     <title>Document</title>
     <link rel="stylesheet" href="stylesheet.css">
 </head>
+
+<style>
+    .middle{
+        justify-content: none;
+        align-items: left;
+        text-align: left;
+    }
+</style>
+
 <body>
     <header>
         <button name="home" onclick="location.href='index.php'">Hem</button>
@@ -37,25 +54,15 @@
                 </div>        
     </header>
 
-
     <div class="middle">
-        <?php 
-        $sql = " SELECT * FROM `tblarticle` WHERE 1 ";
-        $result = mysqli_query($conn, $sql);
-        if ($result && mysqli_num_rows($result) > 0) {
-            while($row=mysqli_fetch_assoc($result)){ 
-                $article_id = $row['id']?>
-        <div class="article">
-        <h1> <a href="article.php?id=<?=$row['id']?>"> <?=$row['rubrik']?></a></h1>
-            <h2><?=$row['ingress'] ?></h2>
-            <p>Författare: <?=$row['writer'] ?></p>
-        </div> <?php
-        
-            }
-        }else{
-            echo "No results found or query error.";
-            mysqli_close($conn);
-        } ?>
-    </div> 
+        <div class="content">
+            <h1><?=$article['rubrik']?></h1>
+            <h2><?=$article['ingress']?></h2>
+            <br> <br>
+            <h2><?=$article['bread']?></h2>
+            <br>
+            <p><?=$article['writer']?></p>
+        </div>
+    </div>
 </body>
 </html>
