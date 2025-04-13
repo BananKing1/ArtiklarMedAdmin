@@ -54,9 +54,36 @@
 
             header("Refresh: 0;"); 
         }
+
+        if(isset($_POST['btnCreateArticle'])){
+            $rubrik = $_POST['rubrik'];
+            $ingress = $_POST['ingress'];
+            $writer = $_POST['writer'];
+            $bread = $_POST['bread'];
+    
+            $sql = "INSERT INTO tblarticle(rubrik, ingress, writer, bread) VALUES ('$rubrik','$ingress','$writer','$bread')";
+            $result = mysqli_query($conn, $sql);
+
+            header("Refresh: 0;"); 
+        }
     ?>
     
     <div class="middle">
+        <div class="content">
+            <h2>Skapa artikel</h2>
+            <form action="create.php" method="POST">
+                <input type="text" name="rubrik" placeholder="Rubrik">
+                <input type="text" name="writer" placeholder="Författare">
+                <div class="bigbox">
+                    <textarea name="ingress" placeholder="Ingress" rows="5" cols="113"></textarea>
+                    <textarea name="bread" placeholder="Brödtext" rows="20" cols="113"></textarea>
+                </div>
+                <input type="submit" name="btnCreateArticle" value="Klar">
+            </form>
+        </div>
+
+        <div id="filler"></div>
+
         <div class="content">
             <form action="create.php" method="post" id="frmLogin">
                 <?php

@@ -63,9 +63,11 @@ header button{
     padding: 2%;
     background: #C1BDB3;
     border-radius: .4rem;
+    display: flex;  flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    margin-top: 2%;
 }
 
 input[type=text]{
@@ -110,4 +112,15 @@ select{
     font-size: 20px; 
     color: #E3F2FD;
     margin: 4%;
+}
+
+.bogbox{
+    display: flex;  flex-direction: column;
+}
+
+textarea {
+    margin: 2%;
+    width: 100%; 
+    padding: 2%;
+    resize: vertical; 
 }
